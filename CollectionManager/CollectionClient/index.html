@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html ng-app="collection">
+      <head>
+        <link rel="index" lang="en">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Collection</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- css -->
+        <link rel="stylesheet" href="css/collection.css" />
+        <link rel="stylesheet" href="scripts/bootstrap/dist/css/bootstrap.min.css" />
+
+        <!-- libs -->
+        <script src="scripts/jquery/dist/jquery.min.js"></script>
+        <script src="scripts/angular/angular.min.js"></script>
+        <script src="scripts/angular-route/angular-route.min.js"></script>
+    </head>
+
+    <body>
+        <div ng-view></div>
+        
+        <!-- app -->
+        <script src="webui/modules/collection.js"></script>
+        <script src="webui/modules/common.js"></script>
+        <script src="webui/controllers/list-controller.js"></script>
+        <script src="webui/controllers/register-controller.js"></script>
+        <script src="webui/services/collection-service.js"></script>
+        <script src="webui/route.js"></script>
+    </body>
+</html>

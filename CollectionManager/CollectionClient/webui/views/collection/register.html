@@ -1,0 +1,14 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div ng-include="'webui/views/common/header.html'"></div>
+
+<div class="jumbotron">
+    <h2 class="text-center">Collection List</h2>
+</div>
+
+<p ng-show="warningMessage.length" class="alert alert-warning text-center">{{warningMessage}}</p>
+<p ng-show="successMessage.length" class="alert alert-success text-center">{{successMessage}}</p>
+
+<form novalidate name="form" class="row" ng-submit="addCollection()">
+ 
+</form>
+<div ng-include="'webui/views/common/footer.html'"></div>
