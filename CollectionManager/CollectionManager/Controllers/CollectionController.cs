@@ -1,6 +1,8 @@
-﻿using CollectionManager.Models.dto;
+﻿using CollectionManager.Models;
+using CollectionManager.Models.dto;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,7 +15,7 @@ namespace CollectionManager.Controllers
         // GET: api/Collection
         public IHttpActionResult Get()
         {
-            return Ok(CollectionDTO.Collections);//it's not working
+            return Ok(CollectionDTO.retrieveMockingList());//it's not working
         }
 
         // GET: api/Collection/5
@@ -35,6 +37,7 @@ namespace CollectionManager.Controllers
         // DELETE: api/Collection/5
         public void Delete(int id)
         {
+
         }
     }
 }

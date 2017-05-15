@@ -20,8 +20,9 @@ namespace CollectionManager
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            //Returning JSON
             config.Formatters.Remove(config.Formatters.XmlFormatter);
-            config.Formatters.JsonFormatter.Indent = true;
+
         }
     }
 }

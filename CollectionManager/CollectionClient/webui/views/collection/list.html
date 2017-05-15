@@ -2,16 +2,105 @@
 <div ng-include="'webui/views/common/header.html'"></div>
 
 <div class="jumbotron">
-    <h2 class="text-center">Collections</h2>
+    <h2 class="text-center">Livros/CDs/DVDs</h2>
 </div>
 
 <p ng-show="warningMessage.length" class="alert alert-warning text-center">{{warningMessage}}</p>
 
 <div class="container">
-    <div class="col-md-4 center"></div>
-    <div class="col-md-4 center">
-        {{collections}}
+    <div class="row">
+        <div lass="col-md-12">
+            <form>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <select ng-model="typeFilter" class="form-control">
+                            <option value="" selected>Tipo</option>
+                            <option>Livro</option>
+                            <option>CD</option>
+                            <option>DVD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <select ng-model="availableFilter" class="form-control">
+                            <option value="" selected>Alocação</option>
+                            <option value="false">Disponível</option>
+                            <option value="true">Alugado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input ng-model="searchFilter" ng-model-options="{debounce: 500}"
+                               class="form-control" placeholder="Procurar...">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div>
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 gridLabel" ng-click="sortBy('Type')">
+            <label>Tipo</label>
+            <span class="sortorder" ng-show="propertyName === 'Type'" ng-class="{reverse: reverse}"></span>
+        </div>
+
+        <div class="col-md-3 gridLabel" ng-click="sortBy('Description')">
+            <label>Descrição</label>
+            <span class="sortorder" ng-show="propertyName === 'Description'" ng-class="{reverse: reverse}"></span>
+        </div>
+
+        <div class="col-md-3 gridLabel" ng-click="sortBy('Location')">
+            <label>Localização</label>
+            <span class="sortorder" ng-show="propertyName === 'Location'" ng-class="{reverse: reverse}"></span>
+        </div>
+
+        <div class="col-md-3 gridLabel" ng-click="sortBy('User.Name')">
+            <label>Alugado por</label>
+            <span class="sortorder" ng-show="propertyName === 'User.Name'" ng-class="{reverse: reverse}"></span>
+        </div>
+
+        <div class="col-md-2 gridLabel" ng-click="sortBy('User.Contact')">
+            <label>Contato</label>
+            <span class="sortorder" ng-show="propertyName === 'User.Contact'" ng-class="{reverse: reverse}"></span>
+        </div>
+
     </div>
-    <div class="col-md-4 center"></div>
+
+    <div class="row" ng-repeat="c in collections | orderBy:propertyName:reverse | 
+                                filter : searchFilter | filter : {Type: typeFilter } | filter : {Available: availableFilter}">
+        <a class="customed" href="#/edit/{{c}}">
+            <div class="col-md-1">{{c.Type}}</div>
+            <div class="col-md-3">{{c.Description}}</div>
+            <div class="col-md-3">{{c.Location}}</div>
+            <div class="col-md-3">{{c.User.Name}}</div>
+            <div class="col-md-2">{{c.User.Contact}}</div>
+        </a>
+    </div>
+    <br /><br />
+
+    <div class="col-md-12">
+        <a href="#/add" class="btn btn-primary">nova coleção</a>
+    </div>
+
+
+    <!--
+    <div class="row">
+        <div class="list-group">
+            <a href="#/edit/{{c}}" class="list-group-item" ng-repeat="c in collections | filter : {nmPDV : filter}">
+                <h4 class="list-group-item-heading">{{pdv.nmPDV}}</h4>
+                <h5 class="list-group-item-text">Horário de funcionamento: {{pdv.hourBegin}}:{{pdv.minBegin}} às {{pdv.hourEnd}}:{{pdv.minEnd}}</h5>
+                <h5 class="list-group-item-text">Telefone: {{pdv.nuPhone}}</h5>
+            </a>
+        </div>
+    </div>
+    -->
 </div>
 <div ng-include="'webui/views/common/footer.html'"></div>

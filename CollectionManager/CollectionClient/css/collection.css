@@ -1,1 +1,29 @@
-﻿
+﻿.sortorder:after {
+    content: '\25b2';
+    /* BLACK UP-POINTING TRIANGLE*/
+}
+
+.sortorder.reverse:after {
+    content: '\25bc';
+    /* BLACK DOWN-POINTING TRIANGLE */
+}
+
+option:nth-child(1) {
+    font-weight: bold;
+}
+
+.input-group {
+    width:100%;
+}
+
+div.gridLabel {
+    cursor: pointer;
+}
+
+.btn {
+    float: right;
+}
+
+a.customed {
+    color : #000000;
+}

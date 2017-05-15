@@ -156,11 +156,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\dto\CollectionDTO.cs" />
+    <Compile Include="Models\entity\Collection.cs" />
     <Compile Include="Models\entity\User.cs" />
-    <Compile Include="Models\entity\CD.cs" />
-    <Compile Include="Models\entity\common\Collection.cs" />
-    <Compile Include="Models\entity\DVD.cs" />
-    <Compile Include="Models\entity\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

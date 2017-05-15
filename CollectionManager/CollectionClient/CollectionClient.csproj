@@ -145,7 +145,7 @@
     <Content Include="scripts\angular\angular.min.js" />
     <Content Include="scripts\angular\index.js" />
     <Content Include="webui\controllers\list-controller.js" />
-    <Content Include="webui\controllers\register-controller.js" />
+    <Content Include="webui\controllers\collection-controller.js" />
     <Content Include="webui\modules\common.js" />
     <Content Include="webui\modules\collection.js" />
     <Content Include="webui\route.js" />
@@ -153,7 +153,7 @@
     <Content Include="webui\views\common\footer.html" />
     <Content Include="webui\views\common\header.html" />
     <Content Include="webui\views\collection\list.html" />
-    <Content Include="webui\views\collection\register.html" />
+    <Content Include="webui\views\collection\collection.html" />
     <Content Include="scripts\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="scripts\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="scripts\bootstrap\dist\css\bootstrap.css" />

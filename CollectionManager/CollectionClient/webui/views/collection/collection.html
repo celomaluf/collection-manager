@@ -1,0 +1,63 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div ng-include="'webui/views/common/header.html'"></div>
+
+<div class="jumbotron">
+    <h2 class="text-center">Cadastro de Coleção</h2>
+</div>
+
+<p ng-show="warningMessage.length" class="alert alert-warning text-center">{{warningMessage}}</p>
+<p ng-show="successMessage.length" class="alert alert-success text-center">{{successMessage}}</p>
+
+<form novalidate name="form" class="row" ng-submit="save()">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Tipo</label>
+
+            <select name="Type" class="form-control"
+                    ng-model="collection.Type" required>
+                <option></option>
+                <option>Livro</option>
+                <option>CD</option>
+                <option>DVD</option>
+            </select>
+            <span ng-show="form.$submitted && form.Type.$error.required"
+                  class="form-control alert-danger">
+                Campo obrigatório
+            </span>
+        </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <input name="Description" class="form-control"
+                   ng-model="colleciton.Description" required>
+            <span ng-show="form.$submitted && form.Description.$error.required"
+                  class="form-control alert-danger">
+                Campo obrigatório
+            </span>
+        </div>
+
+        <div class="form-group ">
+            <label>Localização</label>
+            <input name="Location" class="form-control"
+                  ng-model="collection.Location" required />
+
+            <span ng-show="form.$submitted && form.Location.$error.required"
+                  class="form-control alert-danger">
+                Campo obrigatório
+            </span>
+        </div>
+
+
+        <div class="form-group text-right">
+            <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">
+                Salvar
+            </button>
+            <button type="button" class="btn btn-danger" ng-disabled="!collection" ng-click="del(pdv.cdPdv)">
+                Excluir
+            </button>
+            <a href="#/list" class="btn btn-primary">Voltar</a>
+        </div>
+    </div>
+</form>
+<div ng-include="'webui/views/common/footer.html'"></div>
