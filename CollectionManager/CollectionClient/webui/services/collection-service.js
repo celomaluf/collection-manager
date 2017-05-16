@@ -12,7 +12,7 @@ function collectionService ( $http, BACKEND_CFG) {
 			.success(function (response) {
 			callback(response);
         }).error (function (error) {
-            callback('Error: ' + error.toString());	
+            throw ('Error: ' + error.Message);	
         });
     };
 
@@ -24,21 +24,32 @@ function collectionService ( $http, BACKEND_CFG) {
             .success(function (response) {
             callback(response);
         }).error(function (error) {
-            callback('Error: ' + error.toString());
+            throw ('Error: ' + error.Message);	
         });
     };
 
- 
+
+    /*
+    Delete a given collection
+    */
+    service.updateCollection = function (cdCollection, callback) {
+        $http.put(BACKEND_CFG.url + 'api/collection/' + cdCollection)
+            .success(function (response) {
+                callback(response);
+            }).error(function (error) {
+                throw ('Error: ' + error.Message);
+            });
+    };
 
     /*
     Delete a given collection
     */	
     service.deleteCollection = function (cdCollection, callback) {
-        $http.delete(BACKEND_CFG.url + 'api/collection/' +  cdCollection)
+        $http.delete(BACKEND_CFG.url + 'api/collection/'+ cdCollection)
             .success(function (response) {
             callback(response);
         }).error(function (error) {
-            console.log('Error: ' + error[0] + "\n" + error[1] );
+             throw('Error: ' + error.Message);	
         });
     };
 	return service;

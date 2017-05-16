@@ -21,16 +21,14 @@ function CollectionController($scope, collectionService, $routeParams) {
         isInsert = $scope.collection.CdCollection == null;
         collectionService.saveCollection($scope.collection, function (response) {
             app.manageSaveResponse(response);
-        }, function (error) {
-            $scope.warningMessage = error;
         });
     };
 
     app.manageSaveResponse = function (response) {
-        var isSucess = response[0];
+        var isSuccess = response[0];
         var message = response[1];
         $scope.isDisabled = false;
-        if (isSucess) {
+        if (isSuccess) {
             if (isInsert) {
                 $scope.collection = {};
                 $scope.form.$setPristine(true);
@@ -43,16 +41,14 @@ function CollectionController($scope, collectionService, $routeParams) {
     $scope.deleteCollection = function (cdCollection) {
         $scope.isDisabled = true;
         collectionService.deleteCollection(cdCollection, function (response) {
-            var isSucess = response[0];
+            var isSuccess = response[0];
             var message = response[1];
             $scope.isDisabled = false;
-            if (isSucess) {
+            if (isSuccess) {
                 $scope.collection = {};
-                return $scope.successMessage = response;                
+                return $scope.successMessage = message;                
             }
             $scope.warningMessage = message;
-        }, function (error) {
-            $scope.warningMessage = error;
         });
     };
   

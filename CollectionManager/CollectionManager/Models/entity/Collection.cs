@@ -1,12 +1,7 @@
 ﻿using System;
-using CollectionManager.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace CollectionManager.Models.entity.common
+namespace CollectionManager.Models.entity
 {
     public class Collection
     {

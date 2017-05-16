@@ -2,6 +2,7 @@
 
 <div class="jumbotron">
     <h2 class="text-center">Livros/CDs/DVDs</h2>
+    <h5 class="text-center">Há <b>{{collections.length}}</b> coleção(ões) cadastrada(s)</h5>
 </div>
 
 <p ng-show="warningMessage.length" class="alert alert-warning text-center">{{warningMessage}}</p>
@@ -45,7 +46,9 @@
 <br />
 
 <div class="container">
-    <div class="row">
+    <p ng-show="!collections.length" class="alert alert-warning text-center">Nenhum registro encontrado.</p>
+
+    <div class="row" ng-show="collections.length">
         <div class="col-md-1 gridLabel" ng-click="sortBy('Type')">
             <label>Tipo</label>
             <span class="sortorder" ng-show="propertyName === 'Type'" ng-class="{reverse: reverse}"></span>
@@ -72,7 +75,7 @@
         </div>
 
     </div>
-    <div class="row" ng-repeat="c in collections | orderBy:propertyName:reverse | 
+    <div class="row" ng-repeat="c in collections | orderBy:propertyName:reverse |
                                 filter : searchFilter | filter : {Type: typeFilter } | filter : {Available: availableFilter}">
         <a class="customed" href="#/edit/{{c}}">
             <div class="col-md-1">{{c.Type}}</div>
@@ -83,7 +86,8 @@
         </a>
     </div>
     <br /><br />
-
+</div>
+<div class="container">
     <div class="col-md-12">
         <a href="#/add" class="btn btn-primary">nova coleção</a>
     </div>

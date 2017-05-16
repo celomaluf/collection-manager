@@ -1,9 +1,6 @@
 ﻿using CollectionManager.Models.entity;
-using CollectionManager.Models.entity.common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace CollectionManager.Models.dto
 {
@@ -15,15 +12,19 @@ namespace CollectionManager.Models.dto
             return CdCollection = ++CdCollection;
         }
 
-        //
+        //Start the app with an empty list or a mocking list
         public static void Start()
          {
-            //Collections = new List<Collection>();
-            if (Collections == null)
+            if (Collections != null)
+            {
+                return;
+            }
+            Collections = new List<Collection>();
+            if (TestingPurpose)
             {
                 Collections = retrieveMockingList();
             }
-
+            CdCollection = Collections.Count;
         }
 
         //Insert a new collection
@@ -37,13 +38,10 @@ namespace CollectionManager.Models.dto
                 }
             }
             collection.SetAvailability();
-
             collection.CdCollection = nextVal();
             Collections.Add(collection);
             return true;
         }
-
-     
 
         //Update an existing collection
         public static bool UpdateCollection(Collection collection)
@@ -68,8 +66,6 @@ namespace CollectionManager.Models.dto
         //Delete an existing collection
         public static bool DeleteCollection(int cdCollection)
         {
-            Console.WriteLine("cdCollection: " + cdCollection);
-            Console.Write("cdCollection: " + cdCollection);
             foreach (Collection c in Collections)
             {
                 if (c.CdCollection == cdCollection) 
@@ -105,7 +101,6 @@ namespace CollectionManager.Models.dto
         //This is a starting List of Collection
         public static IList<Collection> retrieveMockingList()
         {
-
             IList<Collection> collections = new List<Collection>();
 
             collections.Add(new Collection { CdCollection = 1, Description = "A", Type = "Livro", Location = "UFSC", Available = false, User = new User { Name = "Marcelo", Contact = "(48) 98434-2715" } });
@@ -120,7 +115,6 @@ namespace CollectionManager.Models.dto
             collections.Add(new Collection { CdCollection = 8, Description = "Jurassic World", Type = "DVD", Location = "Centro - Fpolis", Available = false, User = new User { Name = "Thiago", Contact = "(48) 98543-2112" } });
             collections.Add(new Collection { CdCollection = 9, Description = "Avangers", Type = "DVD", Location = "Córrego Grande", Available = false, User = new User { Name = "Karine", Contact = "(48) 98222-2123" } });
 
-            CdCollection = collections.Count;
             return collections;
         }
 
@@ -131,6 +125,12 @@ namespace CollectionManager.Models.dto
         }
 
         public static IList<Collection> Collections
+        {
+            get;
+            set;
+        }
+
+        public static Boolean TestingPurpose
         {
             get;
             set;

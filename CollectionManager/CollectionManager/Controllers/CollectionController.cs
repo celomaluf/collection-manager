@@ -1,12 +1,6 @@
-﻿using CollectionManager.Models;
-using CollectionManager.Models.dto;
-using CollectionManager.Models.entity.common;
+﻿using CollectionManager.Models.dto;
+using CollectionManager.Models.entity;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace CollectionManager.Controllers
@@ -16,6 +10,7 @@ namespace CollectionManager.Controllers
         // GET: api/Collection
         public IHttpActionResult Get()
         {
+            //CollectionDTO.TestingPurpose = true;
             CollectionDTO.Start();
             return Ok(CollectionDTO.Collections);
         }
@@ -35,15 +30,15 @@ namespace CollectionManager.Controllers
         }
 
         // DELETE: api/Collection/5
-        public IHttpActionResult Delete([FromBody] int cdCollection)
+        [Route("api/Collection/{cdCollection}")]
+        public IHttpActionResult Delete(int cdCollection)
         {
-            bool IsDeleted = CollectionDTO.DeleteCollection(cdCollection);
+            bool IsDeleted = CollectionDTO.DeleteCollection((int) cdCollection);
 
-            String message = IsDeleted ? 
+            String message = IsDeleted ?
                     "Coleção excluída com sucesso." :
                         "Não foi possível excluir a coleção.";
             return Ok(new Object[] { IsDeleted, message });
-
         }
     }
 }
