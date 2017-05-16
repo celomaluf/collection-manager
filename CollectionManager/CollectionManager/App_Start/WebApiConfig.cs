@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CollectionManager
 {
@@ -23,6 +25,12 @@ namespace CollectionManager
             //Returning JSON
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
+            var enableCorsAttribute = new EnableCorsAttribute("*",
+                               "Origin, Content-Type, Accept",
+                               "GET, PUT, POST, DELETE, OPTIONS");
+            config.EnableCors(enableCorsAttribute);
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("json/application"));
         }
     }
 }

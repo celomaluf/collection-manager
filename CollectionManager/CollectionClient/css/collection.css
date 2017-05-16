@@ -22,6 +22,7 @@ div.gridLabel {
 
 .btn {
     float: right;
+    margin-left: 3px;
 }
 
 a.customed {

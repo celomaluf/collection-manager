@@ -1,5 +1,4 @@
-﻿<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
-<div ng-include="'webui/views/common/header.html'"></div>
+﻿<div ng-include="'webui/views/common/header.html'"></div>
 
 <div class="jumbotron">
     <h2 class="text-center">Livros/CDs/DVDs</h2>
@@ -26,8 +25,8 @@
                     <div class="input-group">
                         <select ng-model="availableFilter" class="form-control">
                             <option value="" selected>Alocação</option>
-                            <option value="false">Disponível</option>
-                            <option value="true">Alugado</option>
+                            <option value="true">Disponível</option>
+                            <option value="false">Emprestado</option>
                         </select>
                     </div>
                 </div>
@@ -73,7 +72,6 @@
         </div>
 
     </div>
-
     <div class="row" ng-repeat="c in collections | orderBy:propertyName:reverse | 
                                 filter : searchFilter | filter : {Type: typeFilter } | filter : {Available: availableFilter}">
         <a class="customed" href="#/edit/{{c}}">
@@ -89,18 +87,5 @@
     <div class="col-md-12">
         <a href="#/add" class="btn btn-primary">nova coleção</a>
     </div>
-
-
-    <!--
-    <div class="row">
-        <div class="list-group">
-            <a href="#/edit/{{c}}" class="list-group-item" ng-repeat="c in collections | filter : {nmPDV : filter}">
-                <h4 class="list-group-item-heading">{{pdv.nmPDV}}</h4>
-                <h5 class="list-group-item-text">Horário de funcionamento: {{pdv.hourBegin}}:{{pdv.minBegin}} às {{pdv.hourEnd}}:{{pdv.minEnd}}</h5>
-                <h5 class="list-group-item-text">Telefone: {{pdv.nuPhone}}</h5>
-            </a>
-        </div>
-    </div>
-    -->
 </div>
 <div ng-include="'webui/views/common/footer.html'"></div>

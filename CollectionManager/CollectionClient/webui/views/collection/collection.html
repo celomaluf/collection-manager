@@ -3,6 +3,7 @@
 
 <div class="jumbotron">
     <h2 class="text-center">Cadastro de Coleção</h2>
+    <h4 class="text-center" ng-show="collection.CdCollection" >Coleção nº {{collection.CdCollection}} </h4>
 </div>
 
 <p ng-show="warningMessage.length" class="alert alert-warning text-center">{{warningMessage}}</p>
@@ -15,7 +16,7 @@
         <div class="form-group">
             <label>Tipo</label>
 
-            <select name="Type" class="form-control"
+            <select name="Type" class="form-control" ng-disabled="collection.CdCollection"
                     ng-model="collection.Type" required>
                 <option></option>
                 <option>Livro</option>
@@ -30,7 +31,7 @@
         <div class="form-group">
             <label>Descrição</label>
             <input name="Description" class="form-control"
-                   ng-model="colleciton.Description" required>
+                   ng-model="collection.Description" required>
             <span ng-show="form.$submitted && form.Description.$error.required"
                   class="form-control alert-danger">
                 Campo obrigatório
@@ -47,13 +48,28 @@
                 Campo obrigatório
             </span>
         </div>
+        <div class="form-group ">
+            <label>Emprestado para</label>
+            <input name="Name" class="form-control"
+                   ng-model="collection.User.Name" />
+        </div>
 
+        <div class="form-group ">
+            <label>Contato</label>
+            <input name="Contact" class="form-control" ng-
+                   ng-model="collection.User.Contact" ng-required="collection.User.Name"
+                    /> <!--ng-disabled="!collection.User.Name"-->
+            <span ng-show="form.$submitted && form.Contact.$error.required && !form.Name"
+                  class="form-control alert-danger">
+                Campo obrigatório
+            </span>
+        </div>
 
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">
+            <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || isDisabled">
                 Salvar
             </button>
-            <button type="button" class="btn btn-danger" ng-disabled="!collection" ng-click="del(pdv.cdPdv)">
+            <button type="button" class="btn btn-danger" ng-disabled="isDisabled" ng-click="deleteCollection(collection.CdCollection)" ng-show="collection.CdCollection">
                 Excluir
             </button>
             <a href="#/list" class="btn btn-primary">Voltar</a>
