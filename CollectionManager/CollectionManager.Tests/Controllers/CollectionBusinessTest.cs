@@ -1,5 +1,4 @@
 ﻿using CollectionManager.Controllers;
-using CollectionManager.Models.dto;
 using CollectionManager.Models.entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

@@ -13,14 +13,15 @@ namespace CollectionManager.Models.dto
         }
 
         //Start the app with an empty list or a mocking list
-        public static void Start()
-         {
+        public static void Start(bool testingPurpose)
+        {
             if (Collections != null)
             {
                 return;
             }
+
             Collections = new List<Collection>();
-            if (TestingPurpose)
+            if (testingPurpose)
             {
                 Collections = retrieveMockingList();
             }
@@ -48,12 +49,12 @@ namespace CollectionManager.Models.dto
         {
             foreach (Collection c in Collections)
             {
-                if (SameTypeDiscriptionLocation(collection, c) )
+                if (SameTypeDiscriptionLocation(collection, c))
                 {
                     return false;
                 }
 
-                if ( c.CdCollection == collection.CdCollection )
+                if (c.CdCollection == collection.CdCollection)
                 {
                     collection.SetAvailability();
                     Collections[Collections.IndexOf(c)] = collection;
@@ -68,7 +69,7 @@ namespace CollectionManager.Models.dto
         {
             foreach (Collection c in Collections)
             {
-                if (c.CdCollection == cdCollection) 
+                if (c.CdCollection == cdCollection)
                 {
                     return Collections.Remove(c);
                     //Collections.RemoveAt(Collections.IndexOf(c));
@@ -87,10 +88,10 @@ namespace CollectionManager.Models.dto
                 c.Description.Equals(collection.Description, StringComparison.InvariantCultureIgnoreCase) &&
                  c.Location.Equals(collection.Location, StringComparison.InvariantCultureIgnoreCase);
 
-            //In order to allow an update in the 'User' of the collection
+            //In order to allow an update in the 'User' of the same collection
             bool sameCollection = collection.CdCollection == c.CdCollection;
-        
-            if  (SameTypeDiscriptionLocation && sameCollection ) 
+
+            if (SameTypeDiscriptionLocation && sameCollection)
             {
                 return false;
             }
@@ -109,7 +110,7 @@ namespace CollectionManager.Models.dto
 
             collections.Add(new Collection { CdCollection = 4, Description = "Green Day", Type = "CD", Location = "Botafogo", Available = false, User = new User { Name = "Marcelo", Contact = "(48) 98434-2715" } });
             collections.Add(new Collection { CdCollection = 5, Description = "Metallica", Type = "CD", Location = "Flamengo", Available = false, User = new User { Name = "Thiago", Contact = "(48) 98543-2112" } });
-            collections.Add(new Collection { CdCollection = 6, Description = "The Offspring", Type = "CD", Location = "Santa Tereza", Available = true});
+            collections.Add(new Collection { CdCollection = 6, Description = "The Offspring", Type = "CD", Location = "Santa Tereza", Available = true });
 
             collections.Add(new Collection { CdCollection = 7, Description = "Inside Out", Type = "DVD", Location = "Centro - RJ", Available = true });
             collections.Add(new Collection { CdCollection = 8, Description = "Jurassic World", Type = "DVD", Location = "Centro - Fpolis", Available = false, User = new User { Name = "Thiago", Contact = "(48) 98543-2112" } });
@@ -125,12 +126,6 @@ namespace CollectionManager.Models.dto
         }
 
         public static IList<Collection> Collections
-        {
-            get;
-            set;
-        }
-
-        public static Boolean TestingPurpose
         {
             get;
             set;

@@ -27,20 +27,7 @@ function collectionService ( $http, BACKEND_CFG) {
             throw ('Error: ' + error.Message);	
         });
     };
-
-
-    /*
-    Delete a given collection
-    */
-    service.updateCollection = function (cdCollection, callback) {
-        $http.put(BACKEND_CFG.url + 'api/collection/' + cdCollection)
-            .success(function (response) {
-                callback(response);
-            }).error(function (error) {
-                throw ('Error: ' + error.Message);
-            });
-    };
-
+    
     /*
     Delete a given collection
     */	

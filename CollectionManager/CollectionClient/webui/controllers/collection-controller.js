@@ -46,6 +46,7 @@ function CollectionController($scope, collectionService, $routeParams) {
             $scope.isDisabled = false;
             if (isSuccess) {
                 $scope.collection = {};
+                $scope.form.$setPristine(true);
                 return $scope.successMessage = message;                
             }
             $scope.warningMessage = message;
