@@ -9,7 +9,7 @@ function collectionService ( $http, BACKEND_CFG) {
     */
     service.listCollection = function (callback) {
         $http.get(BACKEND_CFG.url + 'api/collection')
-			.success(function (response) {
+		.success(function (response) {
 			callback(response);
         }).error (function (error) {
             throw ('Error: ' + error.Message);	
@@ -17,26 +17,48 @@ function collectionService ( $http, BACKEND_CFG) {
     };
 
     /*
-    Insert/Update a collection
+    Insert a collection
     */
-    service.saveCollection = function (collection, callback) {
+    service.insertCollection = function (collection, callback) {
         $http.post(BACKEND_CFG.url + 'api/collection/', collection)
-            .success(function (response) {
+        .success(function (response) {
             callback(response);
         }).error(function (error) {
             throw ('Error: ' + error.Message);	
         });
     };
-    
+
+    /*
+    Update a given collection
+    */
+    service.updateCollection = function (collection, callback) {
+        $http.put(BACKEND_CFG.url + 'api/collection/', {
+            CdCollection: collection.CdCollection,
+            Available: collection.Available,
+            Type: collection.Type,
+            Description: collection.Description,
+            Location: collection.Location,
+            User : {
+                Name: collection.User.Name,
+                Contact: collection.User.Contact
+            }
+        })
+        .success(function (response) {
+            callback(response);
+        }).error(function (error) {
+            throw ('Error: ' + error.Message);
+        });
+    };
+
     /*
     Delete a given collection
     */	
     service.deleteCollection = function (cdCollection, callback) {
         $http.delete(BACKEND_CFG.url + 'api/collection/'+ cdCollection)
-            .success(function (response) {
+        .success(function (response) {
             callback(response);
         }).error(function (error) {
-             throw('Error: ' + error.Message);	
+            throw('Error: ' + error.Message);	
         });
     };
 	return service;

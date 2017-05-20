@@ -27,14 +27,14 @@
                         <select ng-model="availableFilter" class="form-control">
                             <option value="" selected>Alocação</option>
                             <option value="true">Disponível</option>
-                            <option value="false">Emprestado</option>
+                            <option value="false">Emprestada</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <input ng-model="searchFilter" ng-model-options="{debounce: 500}"
+                        <input ng-model="searchFilter" ng-model-options="{debounce: 400}"
                                class="form-control" placeholder="Procurar...">
                     </div>
                 </div>
@@ -47,7 +47,6 @@
 
 <div class="container">
     <p ng-show="!collections.length" class="alert alert-warning text-center">Nenhum registro encontrado.</p>
-
     <div class="row" ng-show="collections.length">
         <div class="col-md-1 gridLabel" ng-click="sortBy('Type')">
             <label>Tipo</label>
@@ -65,7 +64,7 @@
         </div>
 
         <div class="col-md-3 gridLabel" ng-click="sortBy('User.Name')">
-            <label>Emprestado para</label>
+            <label>Emprestada para</label>
             <span class="sortorder" ng-show="propertyName === 'User.Name'" ng-class="{reverse: reverse}"></span>
         </div>
 
@@ -75,8 +74,8 @@
         </div>
 
     </div>
-    <div class="row" ng-repeat="c in collections | orderBy:propertyName:reverse |
-                                filter : searchFilter | filter : {Type: typeFilter } | filter : {Available: availableFilter}">
+    <div class="row" ng-repeat="c in collections | orderBy:propertyName:reverse 
+                                    | filter : searchFilter | filter : {Type: typeFilter } | filter : {Available: availableFilter}">
         <a class="customed" href="#/edit/{{c}}">
             <div class="col-md-1">{{c.Type}}</div>
             <div class="col-md-3">{{c.Description}}</div>

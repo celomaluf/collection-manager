@@ -1,17 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CollectionManager.Controllers;
-using CollectionManager.Models.dto;
 using System.Web.Http;
 using CollectionManager.Models.entity;
 using System.Web.Http.Results;
+using CollectionManager.Models;
+using CollectionManager.Tests.Controllers.commom;
 
 namespace CollectionManager.Tests.Controllers
 {
     [TestClass]
     public class CollectionCRUDTest : CollectionTest
     {
-
         [TestMethod]
         public void Test_Insert_Collection_Available()
         {
@@ -26,7 +26,6 @@ namespace CollectionManager.Tests.Controllers
             IHttpActionResult httpActionResult = cc.Post(input);
             var contentResult = httpActionResult as OkNegotiatedContentResult<Object[]>;
             Assert.IsTrue((Boolean)contentResult.Content[0]);
-            Assert.IsTrue(((String)contentResult.Content[1]).Contains("inserida"));
 
         }
 
@@ -43,42 +42,44 @@ namespace CollectionManager.Tests.Controllers
                 Available = false,
                 User = new User { Name = "Rosângela", Contact = "(48) 985432-2115" }
             };
-            IHttpActionResult httpActionResult = cc.Post(input);
+            IHttpActionResult httpActionResult = cc.Put(input);
             var contentResult = httpActionResult as OkNegotiatedContentResult<Object[]>;
 
-            Assert.IsTrue((Boolean) contentResult.Content[0]);
+            Assert.IsTrue((Boolean)contentResult.Content[0]);
         }
 
         [TestMethod]
         public void Test_Delete_Collection()
         {
             CollectionController cc = new CollectionController();
-            int cdCollection = 5;
+            Collection input = new Collection
+            {
+                Description = "Test_Delete_Collection",
+                Type = "Livro",
+                Location = "FGV",
+                Available = false
+            };
+            cc.Post(input);
+
+            int cdCollection = CollectionService.CdCollection;
             IHttpActionResult httpActionResult = cc.Delete(cdCollection);
             var contentResult = httpActionResult as OkNegotiatedContentResult<Object[]>;
             Assert.IsTrue((Boolean)contentResult.Content[0]);
 
-            foreach (Collection c in CollectionDTO.Collections)
-            {
-                Assert.AreNotSame(cdCollection, c.CdCollection);
-            }
+            CollectionService service = new CollectionService();
+            service.FindAllCollections().ForEach(
+                c => Assert.AreNotSame(cdCollection, c.CdCollection)
+            );
         }
-
-
 
         [TestMethod]
         public void Test_Delete_An_Unexisting_Collection()
         {
             CollectionController cc = new CollectionController();
-            int cdCollection = 10;
+            int cdCollection = 100;
             IHttpActionResult httpActionResult = cc.Delete(cdCollection);
             var contentResult = httpActionResult as OkNegotiatedContentResult<Object[]>;
             Assert.IsFalse((Boolean)contentResult.Content[0]);
-
-            foreach (Collection c in CollectionDTO.Collections)
-            {
-                Assert.AreNotSame(cdCollection, c.CdCollection);
-            }
         }
     }
 }

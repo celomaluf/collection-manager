@@ -3,6 +3,7 @@ ListController.$inject = ['$scope', 'collectionService'];
 
 function ListController($scope, collectionService) {
     var app = this;
+    $scope.loading = false;
 
     //Filters
     $scope.searchFilter = '';
@@ -15,9 +16,11 @@ function ListController($scope, collectionService) {
     $scope.reverse = true;
 
     app.listCollection = function () {
+        $scope.loading = true;
         collectionService.listCollection(function (response) {
             console.log(response);
             $scope.collections = response;
+            $scope.loading = false;
         },function ( error) {
             console.log(error);
         });
